@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript Practice</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .box {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+        }
+        h1 {
+            color: #333;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 10px;
+        }
+        .note {
+            background: #fff3cd;
+            padding: 12px;
+            border-left: 4px solid #ffc107;
+            margin: 15px 0;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 4px;
+            font-size: 14px;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        .output-box {
+            background: #2c2c2c;
+            color: #0f0;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            margin-top: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1>JavaScript Practice - Week 4</h1>
+        
+        <div class="note">
+            <strong>Note:</strong> Open your browser console (F12) to see all output.
+        </div>
+
+        <p>Click buttons to test different parts:</p>
+        
+        <button onclick="runLesson7()">Lesson 7</button>
+        <button onclick="runLesson8()">Lesson 8</button>
+        <button onclick="runCalculator()">Calculator</button>
+        <button onclick="runGradeTracker()">Grade Tracker</button>
+        <button onclick="clearConsole()">Clear</button>
+
+        <div id="output" class="output-box">Ready. Check console for details.</div>
+    </div>
+
+    <script src="main.js"></script>
+    <script src="calculator.js"></script>
+    <script src="grade-tracker.js"></script>
+    
+    <script>
+        function showMessage(msg) {
+            let output = document.getElementById('output');
+            output.textContent = output.textContent + msg + '\n';
+        }
+
+        function clearConsole() {
+            document.getElementById('output').textContent = 'Cleared.';
+            console.clear();
+        }
+
+        function runLesson7() {
+            console.log(' Running Lesson 7 ');
+            showMessage('\nLesson 7 ');
+            showMessage('Check console for all outputs.');
+            
+            showMessage('\nSome results:');
+            showMessage('Area of 5x4: ' + getArea(5, 4));
+            showMessage('25C in Fahrenheit: ' + convertTemp(25) + 'F');
+            showMessage('Is 7 even? ' + isEven(7));
+            showMessage('Initials of John Doe: ' + getInitials("John Doe"));
+            showMessage('Reverse of hello: ' + reverseString("hello"));
+        }
+
+        function runLesson8() {
+            console.log(' Running Lesson 8 ');
+            showMessage('\nLesson 8 ');
+            showMessage('Check console for all outputs.');
+            
+            let nums = [1, -2, 3, -4, 5];
+            showMessage('\nSome results:');
+            showMessage('Original: ' + nums);
+            
+            let doubled = nums.map(function(n) {
+                return n * 2;
+            });
+            showMessage('Doubled: ' + doubled);
+            
+            let positives = nums.filter(function(n) {
+                return n > 0;
+            });
+            showMessage('Positives: ' + positives);
+        }
+
+        function runCalculator() {
+            console.log(' Calculator ');
+            showMessage('\n Calculator ');
+            
+            showMessage('10 + 5 = ' + calculate(10, "+", 5));
+            showMessage('10 - 5 = ' + calculate(10, "-", 5));
+            showMessage('10 * 5 = ' + calculate(10, "*", 5));
+            showMessage('10 / 5 = ' + calculate(10, "/", 5));
+            showMessage('10 / 0 = ' + calculate(10, "/", 0));
+        }
+
+        function runGradeTracker() {
+            console.log('Grade Tracker ');
+            showMessage('\n Grade Tracker ');
+            
+            allStudents = [];
+            
+            addStudent("Alice", { math: 95, english: 88, science: 92 });
+            addStudent("Bob", { math: 72, english: 85, science: 78 });
+            addStudent("Charlie", { math: 60, english: 65, science: 58 });
+            
+            showMessage('Students: Alice, Bob, Charlie');
+            
+            showMessage('Alice average: ' + getAverage("Alice"));
+            showMessage('Bob average: ' + getAverage("Bob"));
+            showMessage('Charlie average: ' + getAverage("Charlie"));
+            
+            showMessage('\nClass averages:');
+            showMessage('Math: ' + getClassAverage("math"));
+            showMessage('English: ' + getClassAverage("english"));
+            showMessage('Science: ' + getClassAverage("science"));
+            
+            let top = getTopStudent();
+            if (top) {
+                showMessage('\nTop student: ' + top.name);
+            }
+            
+            let struggling = getStruggling();
+            if (struggling.length > 0) {
+                let names = '';
+                for (let i = 0; i < struggling.length; i++) {
+                    names = names + struggling[i].name + ' ';
+                }
+                showMessage('Needs help: ' + names);
+            }
+            
+            showMessage(makeReportCard("Alice"));
+        }
+    </script>
+</body>
+</html>
